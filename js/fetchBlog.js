@@ -23,7 +23,7 @@ const timeoutId = setTimeout(() => {
     controller.abort(); // 中止 fetch 请求
     blogContent.innerHTML = '<li>Timeout: Data not received within 5 seconds.</li>';
     loading.style.display = "none";
-}, 5000);
+}, 8000);
 
 
 if (blogID) {
