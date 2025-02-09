@@ -38,7 +38,7 @@ if (blogID) {
                 editTimeP.innerHTML = `Last Edited At <span id="editTime">${new Date(data.blogsData.editTime).toLocaleString("en-US", dateOptions)}</span>`;
                 const content = data.blogsData.blogContent;
                 content.split('\n\n').forEach(paragraph => {
-                    paragraph = "　　" + paragraph;
+                    paragraph = "　　" + paragraph.replace(/\n/g, "<br>　　");
                     const p = document.createElement('p');
                     p.innerHTML = paragraph;
                     blogContent.appendChild(p);
