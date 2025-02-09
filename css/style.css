@@ -118,6 +118,7 @@ header {
 footer {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 #prevBlog, #nextBlog, .noPrevBlog, .noNextBlog {
