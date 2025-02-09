@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=LXGW+WenKai+TC:wght@300;400;700&display=swap"
+            rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+    <h1>Blog List</h1>
+    <h2 id="loading">Loading...</h2>
+    <a id="icon" href="index.html">
+        <img src="https://cshland.neocities.org/main/img/cshlandmob.svg" alt="">
+    </a>
+</header>
+
+<div id="blogList">
+    <!-- The blog list will be dynamically populated here -->
+<!--    <a href="">-->
+<!--        <div class="blogCard">-->
+<!--            <p class="title">致那一段暗無天日的歲月</p>-->
+<!--            <p class="postTime">Apr 28, 2023</p>-->
+<!--        </div>-->
+<!--    </a>-->
+</div>
+
+<script src="js/fetchBlogList.js"></script>
+<script>
+    document.querySelector("#icon").style.width = document.querySelector("header h1").offsetWidth * 1.2 + "px";
+</script>
+</body>
+</html>
