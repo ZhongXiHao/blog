@@ -171,7 +171,7 @@ footer {
     }
 
     header {
-        flex-direction: column;
+        flex-direction: column-reverse;
         align-items: flex-start;
     }
 
@@ -187,16 +187,14 @@ footer {
         font-size: 1.1rem; /* Adjust title size */
     }
 
-    #prevBlog, #nextBlog {
-        width: 100%; /* Full width for navigation buttons */
-        justify-content: center; /* Center text */
+    #prevBlog, #nextBlog, .noPrevBlog, .noNextBlog {
         margin-bottom: 10px; /* Add some spacing */
     }
 }
 
 @media (max-width: 480px) {
     h1, h2, h3, h4, h5, h6 {
-        font-size: 1.5rem; /* Adjust heading sizes */
+        font-size: 1rem; /* Adjust heading sizes */
     }
 
     .blogCard {
@@ -205,5 +203,13 @@ footer {
 
     #blogContent {
         font-size: 1rem; /* Adjust content font size */
+    }
+
+    svg {
+        max-width: 32px;
+    }
+
+    #prevBlog, #nextBlog, .noPrevBlog, .noNextBlog {
+        padding: 0.5rem; /* Reduce padding */
     }
 }
