@@ -1,4 +1,6 @@
 // mock api for blog posts
+import {request} from "@/utils/request";
+
 const mockBlogs = {
     status: 200,
     data: [
@@ -41,6 +43,7 @@ const mockBlogs = {
 
 //get blog list
 export const getBlogListApi = () => {
+    // return request.get('/blog/list')
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve(mockBlogs);

@@ -5,43 +5,66 @@ export default {
 </script>
 
 <template>
-  <div class="blog-item">
-    <!--    left slot for title-->
-    <div class="blog-time">
-      <slot name="title">default title</slot>
+  <router-link :to="`/blog/${1}`" class="blog-item-link">
+    <div class="blog-item">
+      <!--    left slot for title-->
+      <div class="blog-title">
+        <slot name="title">default title</slot>
+      </div>
+      <!--    right slot for timestamp-->
+      <div class="blog-timestamp">
+        <slot name="timestamp">default timestamp</slot>
+      </div>
     </div>
-
-    <!--    right slot for timestamp-->
-    <div class="blog-timestamp">
-      <slot name="timestamp">default timestamp</slot>
-    </div>
-  </div>
+  </router-link>
 </template>
 
 <style scoped lang="less">
-.blog-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start; /* 适配多行标题 */
-  border: 1px solid #999;
-  border-radius: 4px;
-  padding: 16px 20px;
-  margin-bottom: 12px;
-  background-color: #f5f5f5;
-  font-family: "Times New Roman", serif;
+.blog-item-link {
+  text-decoration: none;
+  color: var(--gray);
+  gap: 0.5rem;
+  &:hover {
+    color: var(--blue);
+  }
+
+  .blog-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--gray);
+    transition: color 0.2s ease-out;
+    border-radius: 3px;
+    padding: 1.2rem;
+
+    .blog-title {
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      letter-spacing: -0.5px;
+    }
+
+
+  }
 }
 
-.blog-title {
-  font-size: 22px;
-  color: #333;
-  line-height: 1.5;
-  max-width: 70%;
+@media (max-width: 768px) {
+  .blog-item {
+    flex-direction: column;
+
+    .blog-title {
+      font-size: 1.1rem;
+    }
+  }
 }
 
-.blog-time {
-  font-size: 18px;
-  color: #333;
-  white-space: nowrap;
-  align-self: center; /* 单行时垂直居中 */
+@media (max-width: 480px) {
+  .blog-item {
+    padding: 0.8rem;
+
+    .blog-title {
+      font-size: 1rem;
+    }
+  }
 }
 </style>

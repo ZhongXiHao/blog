@@ -1,13 +1,13 @@
 <script>
 import BlogListView from './BlogListView.vue'
-import request from "@/utils/request";
-import {getBlogListApi} from "@/api/blogApi";
 import BlogItem from "@/components/BlogItem.vue";
+import HeaderWithTitleAndIcon from "@/components/HeaderWithTitleAndIcon.vue";
 import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: 'BlogListView',
   components: {
+    HeaderWithTitleAndIcon,
     BlogItem,
     BlogListView
   },
@@ -20,10 +20,10 @@ export default {
       blogs: []
     }
   },
-  methods:{
+  methods: {
     ...mapActions('Blog', ['getBlogListAction']),
   },
-  computed:{
+  computed: {
     ...mapGetters('Blog', ['getBlogList']),
   }
 }
@@ -31,7 +31,11 @@ export default {
 
 <template>
   <div class="blog-list">
-    <h1 class="blog-list-title">Blog List</h1>
+    <header-with-title-and-icon>
+      <template #header-title>
+        Blog List
+      </template>
+    </header-with-title-and-icon>
     <div class="blog-items">
       <BlogItem v-for="blog in getBlogList" :key="blog.id">
         <!--    left slot for title-->
@@ -52,12 +56,13 @@ export default {
   max-width: 900px;
   margin: 20px auto;
   padding: 0 20px;
+
+  .blog-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
 }
 
-.blog-list-title {
-  font-size: 36px;
-  font-family: "Times New Roman", serif;
-  color: #333;
-  margin-bottom: 24px;
-}
+
 </style>
