@@ -1,0 +1,84 @@
+/* variable */
+:root {
+  --green: #05943C;
+  --red: #BB0E10;
+  --blue: #369FD5;
+  --white: #EEEEEE;
+  --gray: #444444;
+  --greenHover: #0A6A2C;
+  --redHover: #8C0F11;
+  --blueHover: #1E6FA3;
+}
+
+/* reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Cabin", "LXGW WenKai TC", serif;
+}
+
+
+body {
+  min-height: 100vh;
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  color: var(--gray);
+  background-color: var(--white);
+}
+
+::selection {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", Times, serif;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  body {
+    width: 90%; /* Full width on smaller screens */
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #blogList a {
+    font-size: 1rem; /* Adjust font size for smaller screens */
+  }
+
+  .blogCard {
+    flex-direction: column; /* Stack elements in blog cards */
+  }
+
+  .title {
+    font-size: 1.1rem; /* Adjust title size */
+  }
+
+  #prevBlog, #nextBlog {
+    width: 100%; /* Full width for navigation buttons */
+    justify-content: center; /* Center text */
+    margin-bottom: 10px; /* Add some spacing */
+  }
+}
+
+@media (max-width: 480px) {
+  h1, h2, h3, h4, h5, h6 {
+    font-size: 1.5rem; /* Adjust heading sizes */
+  }
+
+  .blogCard {
+    padding: 0.8rem; /* Reduce padding */
+  }
+
+  #blogContent {
+    font-size: 1rem; /* Adjust content font size */
+  }
+}
