@@ -37,14 +37,14 @@ export default {
       </template>
     </header-with-title-and-icon>
     <div class="blog-items">
-      <BlogItem v-for="blog in getBlogList" :key="blog.id">
+      <BlogItem v-for="blog in getBlogList" :key="blog.id" :blog-id="blog.id">
         <!--    left slot for title-->
         <template #title>
           {{ blog.title }}
         </template>
         <!--    right slot for timestamp-->
         <template #timestamp>
-          {{ blog.time }}
+          {{ blog.formattedPostedAt }}
         </template>
       </BlogItem>
     </div>

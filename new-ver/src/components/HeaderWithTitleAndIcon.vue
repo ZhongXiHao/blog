@@ -40,6 +40,7 @@ export default {
     font-size: 2.25rem;
     font-family: "Times New Roman", serif;
     text-align: left;
+    font-weight: bold;
   }
 }
 

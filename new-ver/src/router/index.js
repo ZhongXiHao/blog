@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import BlogListView from "@/views/BlogListView.vue";
+import BlogPageView from "@/views/BlogPageView.vue";
 
 Vue.use(VueRouter)
 
@@ -10,6 +11,11 @@ const routes = [
         name: 'list',
         component: BlogListView
     },
+    {
+        path: '/blog/:id',
+        name: 'blog',
+        component: BlogPageView
+    }
 
 ]
 

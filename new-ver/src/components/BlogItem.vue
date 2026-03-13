@@ -1,11 +1,24 @@
 <script>
+import blog from "@/store/modules/blog";
+
 export default {
-  name: "BlogItem"
+  name: "BlogItem",
+  computed: {
+    blog () {
+      return blog
+    }
+  },
+  props: {
+    blogId: {
+      type: [Number, String],
+      required: true
+    }
+  }
 }
 </script>
 
 <template>
-  <router-link :to="`/blog/${1}`" class="blog-item-link">
+  <router-link :to="`/blog/${blogId}`" class="blog-item-link">
     <div class="blog-item">
       <!--    left slot for title-->
       <div class="blog-title">
@@ -24,6 +37,7 @@ export default {
   text-decoration: none;
   color: var(--gray);
   gap: 0.5rem;
+
   &:hover {
     color: var(--blue);
   }
