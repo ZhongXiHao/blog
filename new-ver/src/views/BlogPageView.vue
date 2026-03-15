@@ -1,24 +1,34 @@
 <script>
 import HeaderWithTitleAndIcon from "@/components/HeaderWithTitleAndIcon.vue";
 import {mapActions, mapGetters} from 'vuex';
+import FooterWithPrevAndNextBlog from "@/components/FooterWithPrevAndNextBlog.vue";
 
 export default {
   name: 'BlogPageView',
-  components: {HeaderWithTitleAndIcon},
+  components: {FooterWithPrevAndNextBlog, HeaderWithTitleAndIcon},
   data () {
     return {
       blogDetails: {},
-      renderedBlogContent: ''
+      renderedBlogContent: '',
     }
   },
   async created () {
-    this.blogDetails = await this.getBlogDetailsAction(this.$route.params.id);
+    await this.getBlogDetailsAction(this.$route.params.id);
+    this.blogDetails = this.getBlogDetails
+    console.log(this.blogDetails)
     this.renderBlogContent()
   },
+  watch: {
+    '$route.params.id': async function (newId) {
+      await this.getBlogDetailsAction(newId);
+      this.blogDetails = this.getBlogDetails
+      this.renderBlogContent()
+    }
+  },
   methods: {
-    ...mapActions('Blog', ['getBlogDetailsAction']),
+    ...mapActions('Blog', ['getBlogDetailsAction', 'getBlogListAction']),
     renderBlogContent: function () {
-      console.log(this.blogDetails);
+      // console.log(this.blogDetails);
       const tmpRenderedBlogContent = document.createElement('div');
       this.blogDetails.content.split('\n').forEach(paragraph => {
         paragraph = "　　" + paragraph.replace(/\n/g, "<br>　　");
@@ -27,11 +37,10 @@ export default {
         tmpRenderedBlogContent.appendChild(p);
       })
       this.renderedBlogContent = tmpRenderedBlogContent.innerHTML;
-
-    }
+    },
   },
   computed: {
-    ...mapGetters('Blog', ['getBlogDetails'])
+    ...mapGetters('Blog', ['getBlogDetails', 'getBlogList']),
   }
 
 }
@@ -39,13 +48,20 @@ export default {
 
 <template>
   <div class="blog-details">
-    <header-with-title-and-icon>
-      <template #header-title>
-        {{ blogDetails.title }}
-      </template>
-    </header-with-title-and-icon>
-    <p class="blog-meta">Last Edited At {{ blogDetails.formattedUpdatedAt }}</p>
-    <div class="blog-content" v-html="renderedBlogContent"></div>
+    <div v-if="renderedBlogContent">
+      <header-with-title-and-icon>
+        <template #header-title>
+          {{ blogDetails.title }}
+        </template>
+      </header-with-title-and-icon>
+      <p class="blog-meta">Last Edited At {{ blogDetails.formattedUpdatedAt }}</p>
+      <div class="blog-content" v-html="renderedBlogContent"></div>
+      <FooterWithPrevAndNextBlog
+          :prev-blog="blogDetails.prevBlog"
+          :next-blog="blogDetails.nextBlog"
+      >
+      </FooterWithPrevAndNextBlog>
+    </div>
   </div>
 </template>
 
@@ -53,7 +69,7 @@ export default {
 .blog-details {
   max-width: 900px;
   margin: 20px auto;
-  padding: 0 20px;
+  //padding: 0 20px;
 
   .blog-meta {
     color: #888;

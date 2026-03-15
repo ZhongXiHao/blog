@@ -18,7 +18,7 @@ export default {
 </script>
 
 <template>
-  <router-link :to="`/blog/${blogId}`" class="blog-item-link">
+  <router-link :to="{ name: 'blog', params: { id: blogId } }" class="blog-item-link">
     <div class="blog-item">
       <!--    left slot for title-->
       <div class="blog-title">

@@ -4,6 +4,7 @@ import {formatTime} from '@/mock/blogMock';
 
 export default {
     namespaced: true,
+    methods: {},
     state () {
         return {
             blogList: [],
@@ -36,15 +37,28 @@ export default {
         async getBlogDetailsAction (context, blogId) {
             try {
                 const res = await getBlogDetailsApi(blogId)
-                // console.log(context.getters.getBlogList)
                 if (res) {
                     await context.dispatch('getBlogListAction')
                     const blogCore = context.state.blogList.find(blog => blog.id === parseInt(blogId))
+                    const currentIndex = context.state.blogList.findIndex(blog => blog.id === parseInt(blogId));
+                    // set the previous blog (only id and title)
+                    let prevBlog = null; // null means no previous blog
+                    if (currentIndex > 0) {
+                        prevBlog = context.state.blogList.filter(blog => blog.visible === true)[currentIndex - 1];
+                    }
+                    // set the next blog (only id and title)
+                    let nextBlog = null; // null means no next blog
+                    if (currentIndex < context.state.blogList.length - 1) {
+                        nextBlog = context.state.blogList.filter(blog => blog.visible === true)[currentIndex + 1];
+                    }
                     context.commit('setBlogDetails',
                         {
+                            id: blogId,
                             title: blogCore.title,
                             content: res,
-                            formattedUpdatedAt: formatTime(blogCore.updatedAt)
+                            formattedUpdatedAt: formatTime(blogCore.updatedAt),
+                            prevBlog: prevBlog,
+                            nextBlog: nextBlog
                         })
                 } else {
                     Toast('Blog not found')
@@ -58,6 +72,8 @@ export default {
     },
     getters: {
         getBlogList: state => state.blogList,
-        getBlogDetails: state => state.blogDetails
+        getBlogDetails: state => state.blogDetails,
     }
 }
+
+

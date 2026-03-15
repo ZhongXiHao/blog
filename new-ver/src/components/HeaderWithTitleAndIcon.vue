@@ -24,6 +24,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
+  gap: 20px;
 
   .header-link {
     //icon 在link中居中
@@ -46,10 +47,10 @@ export default {
 
 @media (max-width: 768px) {
   .header {
-    gap: 12px;
+    gap: 10px;
 
     .header-icon{
-      height: 1.5rem;
+      height: 2rem;
     }
     .header-title {
       font-size: 1.75rem;
@@ -59,10 +60,11 @@ export default {
 
 @media (max-width: 480px) {
   .header {
+    align-items: flex-start;
     margin-bottom: 16px;
     .header-link{
       .header-icon{
-        height: 1.25rem;
+        height: 2rem;
       }
     }
     .header-title {
