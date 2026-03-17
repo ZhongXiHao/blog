@@ -143,6 +143,7 @@ export default {
       .prev-blog-title {
         margin-left: 0.25rem;
         font-weight: bold;
+        font-size: 1.25rem;
         //max-width: 70%;
       }
     }
@@ -152,6 +153,7 @@ export default {
       .next-blog-title {
         margin-right: 0.25rem;
         font-weight: bold;
+        font-size: 1.25rem;
         //max-width: 70%;
       }
     }

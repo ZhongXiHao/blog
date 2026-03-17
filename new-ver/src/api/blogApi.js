@@ -1,5 +1,5 @@
 // mock api for blog posts
-import {request} from "@/utils/request";
+import request from "@/utils/request";
 
 const TIMEOUT = 20; // 模拟网络请求延迟
 const mockBlogs = {
@@ -45,27 +45,14 @@ const mockBlogs = {
 import {blogCoreList, blogContentMap, formatTime} from '@/mock/blogMock';
 
 //get blog list
-export const getBlogListApi = () => {
-    // return request.get('/blog/list')
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(blogCoreList);
-        }, TIMEOUT);
-    });
+export const getBlogListApi = async () => {
+    console.log('Fetching blog list from API...');
+    return await request.get('/blogs')
 };
 
 //get blog details by id
-export const getBlogDetailsApi = (id) => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            const blogCore = blogContentMap[id];
-            if (blogCore) {
-                resolve(blogCore);
-            } else {
-                reject(new Error("博客未找到"));
-            }
-        }, TIMEOUT);
-    });
+export const getBlogDetailsApi = async (id) => {
+    return await request.get('/blogs/' + id);
 };
 
 //get prev blog (only id and title)

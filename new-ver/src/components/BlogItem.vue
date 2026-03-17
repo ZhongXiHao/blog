@@ -50,6 +50,7 @@ export default {
     transition: color 0.2s ease-out;
     border-radius: 3px;
     padding: 1.2rem;
+    gap: 1rem;
 
     .blog-title {
       text-align: center;
@@ -63,21 +64,26 @@ export default {
 }
 
 @media (max-width: 768px) {
-  .blog-item {
-    flex-direction: column;
+  .blog-item-link {
+    .blog-item {
+      flex-direction: column;
+      gap: 0.25rem;
 
-    .blog-title {
-      font-size: 1.1rem;
+      .blog-title {
+        font-size: 1.1rem;
+      }
     }
   }
 }
 
 @media (max-width: 480px) {
-  .blog-item {
-    padding: 0.8rem;
+  .blog-item-link {
+    .blog-item {
+      padding: 0.8rem;
 
-    .blog-title {
-      font-size: 1rem;
+      .blog-title {
+        font-size: 1rem;
+      }
     }
   }
 }

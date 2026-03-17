@@ -23,13 +23,16 @@ export default {
         async getBlogListAction (context) {
             try {
                 const res = await getBlogListApi()
-                const filteredList = res.filter(item => item.visible === true).map(item => (
+                const data = res.data || []
+                // console.log(data)
+                const filteredData = data.map(item => (
                     {
                         ...item,
                         formattedPostedAt: formatTime(item.postedAt)
                     })
                 )
-                context.commit('setBlogList', filteredList)
+                // console.log(filteredData)
+                context.commit('setBlogList', filteredData)
             } catch (error) {
                 Toast(error.message || 'Failed to fetch blog list')
             }
@@ -44,19 +47,19 @@ export default {
                     // set the previous blog (only id and title)
                     let prevBlog = null; // null means no previous blog
                     if (currentIndex > 0) {
-                        prevBlog = context.state.blogList.filter(blog => blog.visible === true)[currentIndex - 1];
+                        prevBlog = context.state.blogList[currentIndex - 1];
                     }
                     // set the next blog (only id and title)
                     let nextBlog = null; // null means no next blog
                     if (currentIndex < context.state.blogList.length - 1) {
-                        nextBlog = context.state.blogList.filter(blog => blog.visible === true)[currentIndex + 1];
+                        nextBlog = context.state.blogList[currentIndex + 1];
                     }
                     context.commit('setBlogDetails',
                         {
                             id: blogId,
                             title: blogCore.title,
-                            content: res,
-                            formattedUpdatedAt: formatTime(blogCore.updatedAt),
+                            content: res.data.content,
+                            formattedUpdatedAt: formatTime(blogCore.postedAt),
                             prevBlog: prevBlog,
                             nextBlog: nextBlog
                         })
