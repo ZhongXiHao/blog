@@ -1,6 +1,6 @@
 import {getBlogDetailsApi, getBlogListApi} from "@/api/blogApi";
 import {Toast} from "vant";
-import {formatTime} from '@/mock/blogMock';
+import {formatTime} from '@/utils/timeFormatting';
 
 export default {
     namespaced: true,
@@ -42,26 +42,14 @@ export default {
                 const res = await getBlogDetailsApi(blogId)
                 if (res) {
                     await context.dispatch('getBlogListAction')
-                    const blogCore = context.state.blogList.find(blog => blog.id === parseInt(blogId))
-                    const currentIndex = context.state.blogList.findIndex(blog => blog.id === parseInt(blogId));
-                    // set the previous blog (only id and title)
-                    let prevBlog = null; // null means no previous blog
-                    if (currentIndex > 0) {
-                        prevBlog = context.state.blogList[currentIndex - 1];
-                    }
-                    // set the next blog (only id and title)
-                    let nextBlog = null; // null means no next blog
-                    if (currentIndex < context.state.blogList.length - 1) {
-                        nextBlog = context.state.blogList[currentIndex + 1];
-                    }
                     context.commit('setBlogDetails',
                         {
                             id: blogId,
-                            title: blogCore.title,
+                            title: res.data.title,
                             content: res.data.content,
-                            formattedUpdatedAt: formatTime(blogCore.postedAt),
-                            prevBlog: prevBlog,
-                            nextBlog: nextBlog
+                            formattedUpdatedAt: formatTime(res.data.updatedAt),
+                            prevBlog: res.data.prevBlog,
+                            nextBlog: res.data.nextBlog,
                         })
                 } else {
                     Toast('Blog not found')
