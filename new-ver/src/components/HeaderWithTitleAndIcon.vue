@@ -32,8 +32,9 @@ export default {
     justify-content: center;
     align-items: center;
     .header-icon {
-      width: 100%;
-      height: 2.25rem;
+      margin-top: 5px;
+      min-width: 100%;
+      min-height: 2.25rem;
     }
   }
 
@@ -64,7 +65,7 @@ export default {
     margin-bottom: 16px;
     .header-link{
       .header-icon{
-        height: 2rem;
+        min-height: 2rem;
       }
     }
     .header-title {

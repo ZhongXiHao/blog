@@ -51,14 +51,11 @@ export default {
                             prevBlog: res.data.prevBlog,
                             nextBlog: res.data.nextBlog,
                         })
-                } else {
-                    Toast('Blog not found')
                 }
-                console.log(context.state.blogDetails)
-            } catch (error) {
-                Toast(error.message || 'Failed to fetch blog details')
+            }finally {
+
             }
-            return context.state.blogDetails
+            // return context.state.blogDetails
         }
     },
     getters: {

@@ -3,7 +3,7 @@ import Vue from 'vue'
 
 import {Toast} from "vant"
 
-const BASE_URL = 'http://localhost:3001/api' //TODO: get base URL later
+const BASE_URL = 'http://192.168.5.8:3001/api' //TODO: get base URL later
 
 const request = axios.create({
     baseURL: BASE_URL, // Base URL: The base URL for all requests
@@ -26,10 +26,10 @@ request.interceptors.request.use(config => {
 // Customize response interceptor
 request.interceptors.response.use(response => {
     const res = response.data
-    console.dir(response)
+    console.log(res)
     if (res.code !== 200) {
         Toast(res.msg ? res.msg : 'Network Error')
-        return Promise.reject(res.msg)
+        return Promise.reject({ code: res.code, msg: res.msg })
     } else {
         Toast.clear()
     }

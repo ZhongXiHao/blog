@@ -12,11 +12,22 @@ export default {
       renderedBlogContent: '',
     }
   },
+  async mounted () {
+
+  },
   async created () {
-    await this.getBlogDetailsAction(this.$route.params.id);
-    this.blogDetails = this.getBlogDetails
-    console.log(this.blogDetails)
-    this.renderBlogContent()
+    try {
+      await this.getBlogDetailsAction(this.$route.params.id);
+      this.blogDetails = this.getBlogDetails
+      console.log(this.blogDetails)
+      this.renderBlogContent()
+    } catch (error) {
+      if (error.code === 404) {
+        await this.$router.push('/404')
+      } else {
+        console.error('Failed to fetch blog details:', error);
+      }
+    }
   },
   watch: {
     '$route.params.id': async function (newId) {
@@ -80,6 +91,14 @@ export default {
   .blog-content {
     font-size: 1.2rem;
     line-height: 1.5;
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-details {
+    .blog-content {
+      font-size: 1rem;
+    }
   }
 }
 </style>

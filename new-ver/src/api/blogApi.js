@@ -42,7 +42,7 @@ const mockBlogs = {
         }]
 };
 
-import {blogCoreList, blogContentMap, formatTime} from '@/mock/blogMock';
+// import {blogCoreList, blogContentMap, formatTime} from '@/mock/blogMock';
 
 //get blog list
 export const getBlogListApi = async () => {
@@ -54,35 +54,3 @@ export const getBlogListApi = async () => {
 export const getBlogDetailsApi = async (id) => {
     return await request.get('/blogs/' + id);
 };
-
-//get prev blog (only id and title)
-export const getPrevBlogApi = (currentId) => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            const currentIndex = blogCoreList.findIndex(blog => blog.id === parseInt(currentId));
-            if (currentIndex > 0) {
-                const prevBlog = blogCoreList[currentIndex - 1];
-                resolve({id: prevBlog.id, title: prevBlog.title});
-            } else {
-                resolve(null); // 没有上一篇了
-            }
-        }, TIMEOUT);
-    });
-};
-
-//get next blog (only id and title)
-export const getNextBlogApi = (currentId) => {
-    return new Promise((resolve) => {
-            setTimeout(() => {
-                const currentIndex = blogCoreList.findIndex(blog => blog.id === parseInt(currentId));
-                if (currentIndex < blogCoreList.length - 1) {
-                    const nextBlog = blogCoreList[currentIndex + 1];
-                    resolve({id: nextBlog.id, title: nextBlog.title});
-                } else {
-                    resolve(null); // 没有下一篇了
-                }
-            }, TIMEOUT);
-
-        }
-    )
-}
