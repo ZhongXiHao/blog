@@ -7,4 +7,10 @@
   to = "http://81.68.236.53:3001/api/:splat"
   status = 200
   force = true
-  headers = { "Access-Control-Allow-Origin" = "*", "Access-Control-Allow-Methods" = "GET, POST, PUT, DELETE", "Access-Control-Allow-Headers" = "Content-Type" }
+  conditions = { Query = { "api": "*" } }
+  headers = { "Access-Control-Allow-Origin" = "*", "Access-Control-Allow-Methods" = "GET, POST, PUT, DELETE", "Access-Control-Allow-Headers" = "Content-Type", "Content-Type" = "application/json" }
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
