@@ -3,7 +3,7 @@ import Vue from 'vue'
 
 import {Toast} from "vant"
 
-const BASE_URL = 'http://192.168.5.8:3001/api' //TODO: get base URL later
+const BASE_URL = process.env.VUE_APP_API_BASE_URL || 'http://localhost:3001/api' // Base URL: The base URL for all requests
 
 const request = axios.create({
     baseURL: BASE_URL, // Base URL: The base URL for all requests
